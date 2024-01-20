@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Calculadora</title>
+  </head>
+  <body>
+    <div class="grid grid-cols-8 mt-7">
+      <div class="flex flex-col w-full col-start-4 col-span-2">
+        <div
+          class="text-center mb-1 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+        >
+          <h1 class="font-semibold">Calculadora</h1>
+        </div>
+        <div class="flex justify-center">
+          <h3
+            id="resultado"
+            class="w-2/4 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          ></h3>
+          <button
+            id="porcentagem"
+            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            %
+          </button>
+          <button
+            id="multiplicacao"
+            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            x
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <button
+            id="sete"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            7
+          </button>
+          <button
+            id="oito"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            8
+          </button>
+          <button
+            id="nove"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            9
+          </button>
+          <button
+            id="soma"
+            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            +
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <button
+            id="quatro"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            4
+          </button>
+          <button
+            id="cinco"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            5
+          </button>
+          <button
+            id="seis"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            6
+          </button>
+          <button
+            id="subtracao"
+            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            -
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <button
+            id="um"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            1
+          </button>
+          <button
+            id="dois"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            2
+          </button>
+          <button
+            id="tres"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            3
+          </button>
+          <button
+            id="divisao"
+            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            /
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <button
+            id="virgula"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            ,
+          </button>
+          <button
+            id="zero"
+            class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            0
+          </button>
+          <button
+            id="igual"
+            class="w-1/4 bg-orange-500 text-white hover:bg-orange-600 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            =
+          </button>
+          <button
+            id="limpar"
+            class="w-1/4 bg-black text-white hover:bg-gray-900 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            C
+          </button>
+        </div>
+      </div>
+      <script src="script.js"></script>
+    </div>
+  </body>
+</html>
