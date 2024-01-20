@@ -85,10 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
     adicionarOperador("%");
     realizarOperacao();
     resultado.textContent = mostrarResultado();
+    proximaOperacao();
   });
   igual.addEventListener("click", () => {
     try {
-      if (verificarOperador() && verificarOperandos()) {
+      if (verificarOperador()) {
         realizarOperacao();
         resultado.textContent = mostrarResultado();
         proximaOperacao();
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const operacao = [0, undefined, 0];
 let resultado = 0;
-let digitado = 0;
+let digitado = [0];
 
 function verificarOperador() {
   if (operacao[1] !== undefined) {
@@ -116,124 +117,98 @@ function verificarOperador() {
   return false;
 }
 
-function verificarOperandos() {
-  if (operacao[0] !== 0 && operacao[2] !== 0) {
-    return true;
-  }
-  return false;
-}
-
 function adicionarNumero(numero) {
+  digitado.push(numero);
+
+  // PRIMEIRO OPERANDO
   if (!verificarOperador()) {
-    if (operacao[0] === "-") {
-      operacao[0] = Number("-" + numero);
-      digitado = operacao[0];
+    if (operacao[0] === 0) {
+      operacao[0] = numero;
       console.log(`Primeiro operando: ${operacao[0]}`);
       return;
     }
 
-    if (String(operacao[0]).includes(".")) {
-      operacao[0] = `${operacao[0]}${numero}`;
-      digitado = operacao[0].replace(".", ",");
-      console.log(`Primeiro operando: ${operacao[0]}`);
-      return;
-    }
-
-    if (operacao[0] !== 0) {
-      operacao[0] = operacao[0] * 10 + numero;
-      digitado = operacao[0];
-      console.log(`Primeiro operando: ${operacao[0]}`);
-      return;
-    }
-
-    operacao[0] = numero;
-    digitado = operacao[0];
+    operacao[0] = `${operacao[0]}${numero}`;
     console.log(`Primeiro operando: ${operacao[0]}`);
+
+    return;
   }
-  if (verificarOperador()) {
-    if (String(operacao[2]).includes(".")) {
-      operacao[2] = `${operacao[2]}${numero}`;
-      digitado = operacao[2].replace(".", ",");
-      console.log(`Primeiro operando: ${operacao[2]}`);
-      return;
-    }
-
-    if (operacao[2] !== 0) {
-      operacao[2] = operacao[2] * 10 + numero;
-      digitado = operacao[2];
-      console.log(`Segundo operando: ${operacao[2]}`);
-      return;
-    }
-
+  // SEGUNDO OPERANDO
+  if (operacao[2] === 0) {
     operacao[2] = numero;
-    digitado = operacao[2];
     console.log(`Segundo operando: ${operacao[2]}`);
-  }
-}
-
-function adicionarVirgula() {
-  if (!verificarOperador()) {
-    if (operacao[0] === "-") {
-      operacao[0] = "-0.";
-      digitado = "-0,";
-      console.log(`Primeiro operando: ${operacao[0]}`);
-      return;
-    }
-
-    if (String(operacao[0]).includes(".")){
-      throw new Error ("Número já possui uma vírgula.")
-    }
-
-    digitado = operacao[0] + ",";
-    operacao[0] += ".";
-    console.log(`Primeiro operando: ${operacao[0]}`);
-  }
-  if (verificarOperador()) {
-    if (String(operacao[2]).includes(".")){
-      throw new Error ("Número já possui uma vírgula.")
-    }
-
-    digitado = operacao[2] + ",";
-    operacao[2] += ".";
-    console.log(`Primeiro operando: ${operacao[2]}`);
-  }
-}
-
-function adicionarOperador(simboloOperador) {
-  if (operacao[0] === 0 && simboloOperador === "-") {
-    operacao[0] = "-";
-    digitado = operacao[0];
-    console.log(`Primeiro operando: ${operacao[0]}`);
     return;
   }
 
-  if (operacao[1]){
-    realizarOperacao()
-    proximaOperacao()
+  operacao[2] = `${operacao[2]}${numero}`;
+  console.log(`Segundo operando: ${operacao[2]}`);
+}
+
+function adicionarVirgula() {
+  // PRIMEIRO OPERANDO
+  if (!verificarOperador()) {
+    if (String(operacao[0]).includes(".")) {
+      throw new Error("Número já possui uma vírgula.");
+    }
+
+    digitado.push(",");
+    operacao[0] += ".";
+    console.log(`Primeiro operando: ${operacao[0]}`);
+    return;
+  }
+  // SEGUNDO OPERANDO
+  if (String(operacao[2]).includes(".")) {
+    throw new Error("Número já possui uma vírgula.");
   }
 
-  operacao[1] = simboloOperador;
-  digitado = operacao[1];
-  console.log(`Operador: ${operacao[1]}`);
+  if (operacao[2] === 0) {
+    digitado.push(0);
+  }
+
+  digitado.push(",");
+  operacao[2] += ".";
+  console.log(`Segundo operando: ${operacao[2]}`);
+}
+
+function adicionarOperador(simboloOperador) {
+  let ultimoDigitado = digitado[digitado.length - 1];
+
+  if (operacao[1] && typeof ultimoDigitado === "number") {
+    realizarOperacao();
+    proximaOperacao();
+  }
+
+  if (ultimoDigitado !== simboloOperador) {
+    digitado.push(simboloOperador);
+    operacao[1] = simboloOperador;
+    console.log(`Operador: ${operacao[1]}`);
+  }
 }
 
 function realizarOperacao() {
   switch (operacao[1]) {
     case "+":
       resultado = Number(operacao[0]) + Number(operacao[2]);
+      console.log(`Operação realizada`);
       break;
     case "-":
       resultado = Number(operacao[0]) - Number(operacao[2]);
+      console.log(`Operação realizada`);
       break;
     case "/":
+      if (operacao[2] === 0) {
+        throw new Error("Não é possível dividir por zero.");
+      }
       resultado = Number(operacao[0]) / Number(operacao[2]);
+      console.log(`Operação realizada`);
       break;
     case "x":
       resultado = Number(operacao[0]) * Number(operacao[2]);
+      console.log(`Operação realizada`);
       break;
     case "%":
       resultado = Number(operacao[0]) / 100;
-      operacao[0] = resultado
+      console.log(`Operação realizada`);
       break;
 
     default:
@@ -244,8 +219,9 @@ function realizarOperacao() {
 }
 
 function mostrarResultado() {
+  digitado = [resultado];
   console.log(`Resultado: ${resultado}`);
-  return resultado;
+  return digitado.join("").replace(".", ",");
 }
 
 function proximaOperacao() {
@@ -260,9 +236,10 @@ function limparOperacao() {
   operacao[1] = undefined;
   operacao[2] = 0;
   resultado = 0;
+  digitado = [];
   console.log(`Operandos, operador e resultado reiniciados`);
 }
 
 function mostrarDigitado() {
-  return digitado;
+  return digitado.length === 0 ? 0 : digitado.join("").replace(".", ",");
 }
