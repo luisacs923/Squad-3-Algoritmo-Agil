@@ -120,6 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.textContent = mostrarResultado();
     proximaOperacao();
   });
+  log.addEventListener("click", () => {
+    adicionarOperador("log");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
 });
 
 const operacao = [0, undefined, 0];
@@ -236,7 +242,13 @@ function realizarOperacao() {
       resultado = Math.cos(resultado);
       console.log(`Operação realizada`);
       break;
-    
+    case "log":
+      if (Number(operacao[0]) <= 0) {
+        throw new Error("Não é possível calcular log de números não positivos.");
+      }
+      resultado = Math.log10(Number(operacao[0]));
+      console.log(`Operação realizada`);
+      break;
     default:
       throw new Error(
         "Não foi possível realizar a operação: operador inválido."
