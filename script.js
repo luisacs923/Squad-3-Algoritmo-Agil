@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const virgula = document.getElementById("virgula");
   const limpar = document.getElementById("limpar");
   const resultado = document.getElementById("resultado");
+  const seno = document.getElementById("seno");
+  const cosseno = document.getElementById("cosseno");
+  const log = document.getElementById("log");
+  const pi = document.getElementById("pi");
   const apagar = document.getElementById("apagar");
 
   resultado.textContent = mostrarDigitado();
@@ -105,11 +109,30 @@ document.addEventListener("DOMContentLoaded", () => {
     limparOperacao();
     resultado.textContent = mostrarResultado();
   });
+  seno.addEventListener("click", () => {
+    adicionarOperador("sin");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
+  cosseno.addEventListener("click", () => {
+    adicionarOperador("cos");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
+  log.addEventListener("click", () => {
+    adicionarOperador("log");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
   apagar.addEventListener("click", () => {
     apagarUltimoCaractere();
     resultado.textContent = mostrarDigitado();
   });
 });
+
 
 const operacao = [0, undefined, 0];
 let resultado = 0;
@@ -242,12 +265,29 @@ function realizarOperacao() {
       resultado = Number(operacao[0]) / 100;
       console.log(`Operação realizada`);
       break;
-
+    case "sin":
+      resultado = (Number(operacao[0])*Math.PI)/180;
+      resultado = Math.sin(resultado);
+      console.log(`Operação realizada`);
+      break;
+    case "cos":
+      resultado = (Number(operacao[0])*Math.PI)/180;
+      resultado = Math.cos(resultado);
+      console.log(`Operação realizada`);
+      break;
+    case "log":
+      if (Number(operacao[0]) <= 0) {
+        throw new Error("Não é possível calcular log de números não positivos.");
+      }
+      resultado = Math.log10(Number(operacao[0]));
+      console.log(`Operação realizada`);
+      break;
     default:
       throw new Error(
         "Não foi possível realizar a operação: operador inválido."
       );
   }
+  resultado = Math.round(resultado*100000000)/100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
 }
 
 function mostrarResultado() {
