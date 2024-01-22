@@ -114,6 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.textContent = mostrarResultado();
     proximaOperacao();
   });
+  cosseno.addEventListener("click", () => {
+    adicionarOperador("cos");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
 });
 
 const operacao = [0, undefined, 0];
@@ -225,6 +231,12 @@ function realizarOperacao() {
       resultado = Math.sin(resultado);
       console.log(`Operação realizada`);
       break;
+    case "cos":
+      resultado = (Number(operacao[0])*Math.PI)/180;
+      resultado = Math.cos(resultado);
+      console.log(`Operação realizada`);
+      break;
+    
     default:
       throw new Error(
         "Não foi possível realizar a operação: operador inválido."
