@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cosseno = document.getElementById("cosseno");
   const log = document.getElementById("log");
   const pi = document.getElementById("pi");
+  const apagar = document.getElementById("apagar");
 
   resultado.textContent = mostrarDigitado();
 
@@ -99,9 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
         proximaOperacao();
         return;
       }
-      throw new Error("Erro ao realizar a operação");
+      throw new Error("Erro ao realizar a operação: operador indefinido");
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
     }
   });
   limpar.addEventListener("click", () => {
@@ -125,12 +126,16 @@ document.addEventListener("DOMContentLoaded", () => {
     realizarOperacao();
     resultado.textContent = mostrarResultado();
     proximaOperacao();
+  apagar.addEventListener("click", () => {
+    apagarUltimoCaractere();
+    resultado.textContent = mostrarDigitado();
   });
 });
 
 const operacao = [0, undefined, 0];
 let resultado = 0;
 let digitado = [0];
+let ultimoDigitado = 0;
 
 function verificarOperador() {
   if (operacao[1] !== undefined) {
@@ -140,28 +145,42 @@ function verificarOperador() {
 }
 
 function adicionarNumero(numero) {
-  digitado.push(numero);
-
   // PRIMEIRO OPERANDO
   if (!verificarOperador()) {
+    if (operacao[0] === 0 && numero === 0) {
+      digitado = [numero];
+      console.log(`Zero à esquerda não será exibido`);
+      return;
+    }
     if (operacao[0] === 0) {
+      digitado = [numero];
       operacao[0] = numero;
       console.log(`Primeiro operando: ${operacao[0]}`);
       return;
     }
 
+    digitado.push(numero);
     operacao[0] = `${operacao[0]}${numero}`;
     console.log(`Primeiro operando: ${operacao[0]}`);
 
     return;
   }
   // SEGUNDO OPERANDO
+  ultimoDigitado = digitado[digitado.length - 1];
+
+  if (operacao[2] === 0 && numero === 0) {
+    console.log(`Zero à esquerda não será exibido`);
+    return;
+  }
   if (operacao[2] === 0) {
+    if (ultimoDigitado == 0) digitado.pop();
+    digitado.push(numero);
     operacao[2] = numero;
     console.log(`Segundo operando: ${operacao[2]}`);
     return;
   }
 
+  digitado.push(numero);
   operacao[2] = `${operacao[2]}${numero}`;
   console.log(`Segundo operando: ${operacao[2]}`);
 }
@@ -179,11 +198,13 @@ function adicionarVirgula() {
     return;
   }
   // SEGUNDO OPERANDO
+  ultimoDigitado = digitado[digitado.length - 1];
+
   if (String(operacao[2]).includes(".")) {
     throw new Error("Número já possui uma vírgula.");
   }
 
-  if (operacao[2] === 0) {
+  if (operacao[2] == 0 && ultimoDigitado !== 0) {
     digitado.push(0);
   }
 
@@ -193,18 +214,28 @@ function adicionarVirgula() {
 }
 
 function adicionarOperador(simboloOperador) {
-  let ultimoDigitado = digitado[digitado.length - 1];
+  ultimoDigitado = digitado[digitado.length - 1];
 
   if (operacao[1] && typeof ultimoDigitado === "number") {
     realizarOperacao();
+    mostrarResultado();
     proximaOperacao();
   }
 
-  if (ultimoDigitado !== simboloOperador) {
-    digitado.push(simboloOperador);
+  if (operacao[1] === simboloOperador) {
+    return;
+  }
+
+  if (operacao[1] && operacao[1] !== simboloOperador) {
+    digitado[digitado.length - 1] = simboloOperador;
     operacao[1] = simboloOperador;
     console.log(`Operador: ${operacao[1]}`);
+    return;
   }
+
+  digitado.push(simboloOperador);
+  operacao[1] = simboloOperador;
+  console.log(`Operador: ${operacao[1]}`);
 }
 
 function realizarOperacao() {
@@ -281,4 +312,46 @@ function limparOperacao() {
 
 function mostrarDigitado() {
   return digitado.length === 0 ? 0 : digitado.join("").replace(".", ",");
+}
+
+function apagarUltimoCaractere() {
+  digitado = digitado.join("").split("");
+
+  let ultimoCaractere = digitado.pop();
+
+  if (digitado.length === 0){
+    digitado.push(0)
+  }
+
+  // REMOVER DO SEGUNDO OPERANDO
+  if (operacao[2] !== 0) {
+    operacao[2] = operacao[2].toString();
+    operacao[2] = operacao[2].slice(0, -1);
+    console.log(`Removido: ${ultimoCaractere}`);
+
+    if (!operacao[2] || operacao[2] === "0") {
+      operacao[2] = 0;
+    }
+    console.log(`Segundo operando: ${operacao[2]}`);
+    return;
+  }
+
+  //REMOVER OPERADOR
+  if (isNaN(Number(ultimoCaractere)) && ultimoCaractere !== ",") {
+    operacao[1] = undefined;
+    console.log(`Operador: ${operacao[1]}`);
+    return;
+  }
+
+  // REMOVER DO PRIMEIRO OPERANDO
+  if (operacao[0] !== 0 && operacao[1] === undefined) {
+    operacao[0] = operacao[0].toString();
+    operacao[0] = operacao[0].slice(0, -1);
+    console.log(`Removido: ${ultimoCaractere}`);
+  }
+
+  if (!operacao[0] || operacao[0] === "0") {
+    operacao[0] = 0;
+  }
+  console.log(`Primeiro operando: ${operacao[0]}`);
 }
