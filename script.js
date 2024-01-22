@@ -126,11 +126,13 @@ document.addEventListener("DOMContentLoaded", () => {
     realizarOperacao();
     resultado.textContent = mostrarResultado();
     proximaOperacao();
+  });
   apagar.addEventListener("click", () => {
     apagarUltimoCaractere();
     resultado.textContent = mostrarDigitado();
   });
 });
+
 
 const operacao = [0, undefined, 0];
 let resultado = 0;
