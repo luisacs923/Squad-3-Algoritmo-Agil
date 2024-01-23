@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <title>Calculadora</title>
   </head>
   <body>
@@ -13,6 +14,32 @@
           class="text-center mb-1 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow"
         >
           <h1 class="font-semibold">Calculadora</h1>
+        </div>
+        <div class="flex justify-center">
+          <h3
+            id="resultado"
+            class="w-1/2 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            0
+          </h3>
+          <button
+            id="apagar"
+            class="w-1/6 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+          <img class="mx-auto" width="20" src="/delete-left.svg" alt="ícone apagar">
+          </button>
+          <button
+            id="porcentagem"
+            class="w-1/6 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            %
+          </button>
+          <button
+            id="pi"
+            class="w-1/6 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          >
+            &#960
+          </button>
         </div>
         <div class="flex justify-center">
           <button
@@ -34,36 +61,10 @@
             log
           </button>
           <button
-            id="pi"
+            id="divisao"
             class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
           >
-            &#960
-          </button>
-        </div>
-        <div class="flex justify-center">
-          <h3
-            id="resultado"
-            class="w-1/2 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow"
-          >
-            0
-          </h3>
-          <button
-            id="apagar"
-            class="w-1/6 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
-          >
-          <img class="mx-auto" width="20" src="/delete-left.svg" alt="ícone apagar" srcset="">
-          </button>
-          <button
-            id="porcentagem"
-            class="w-1/6 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
-          >
-            %
-          </button>
-          <button
-            id="multiplicacao"
-            class="w-1/6 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
-          >
-            x
+            /
           </button>
         </div>
         <div class="flex justify-center">
@@ -86,10 +87,10 @@
             9
           </button>
           <button
-            id="soma"
+            id="multiplicacao"
             class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
           >
-            +
+            x
           </button>
         </div>
         <div class="flex justify-center">
@@ -138,10 +139,10 @@
             3
           </button>
           <button
-            id="divisao"
+            id="soma"
             class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow"
           >
-            /
+            +
           </button>
         </div>
         <div class="flex justify-center">

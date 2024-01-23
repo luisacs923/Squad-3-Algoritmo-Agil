@@ -127,12 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.textContent = mostrarResultado();
     proximaOperacao();
   });
+  pi.addEventListener("click", () => {
+    adicionarNumero(Math.PI);
+    resultado.textContent = mostrarDigitado();
+  });
   apagar.addEventListener("click", () => {
     apagarUltimoCaractere();
     resultado.textContent = mostrarDigitado();
   });
 });
-
 
 const operacao = [0, undefined, 0];
 let resultado = 0;
@@ -149,6 +152,16 @@ function verificarOperador() {
 function adicionarNumero(numero) {
   // PRIMEIRO OPERANDO
   if (!verificarOperador()) {
+    if (numero === Math.PI && operacao[0] !== 0) {
+      operacao[1] = "x";
+      operacao[2] = numero;
+
+      realizarOperacao();
+      mostrarResultado();
+      proximaOperacao();
+      return;
+    }
+
     if (operacao[0] === 0 && numero === 0) {
       digitado = [numero];
       console.log(`Zero à esquerda não será exibido`);
@@ -169,6 +182,11 @@ function adicionarNumero(numero) {
   }
   // SEGUNDO OPERANDO
   ultimoDigitado = digitado[digitado.length - 1];
+
+  if (numero === Math.PI && String(operacao[2]).includes(".")) {
+    console.log(`Não é possível adicionar o número de PI ao operando`);
+    return;
+  }
 
   if (operacao[2] === 0 && numero === 0) {
     console.log(`Zero à esquerda não será exibido`);
@@ -266,18 +284,20 @@ function realizarOperacao() {
       console.log(`Operação realizada`);
       break;
     case "sin":
-      resultado = (Number(operacao[0])*Math.PI)/180;
+      resultado = (Number(operacao[0]) * Math.PI) / 180;
       resultado = Math.sin(resultado);
       console.log(`Operação realizada`);
       break;
     case "cos":
-      resultado = (Number(operacao[0])*Math.PI)/180;
+      resultado = (Number(operacao[0]) * Math.PI) / 180;
       resultado = Math.cos(resultado);
       console.log(`Operação realizada`);
       break;
     case "log":
       if (Number(operacao[0]) <= 0) {
-        throw new Error("Não é possível calcular log de números não positivos.");
+        throw new Error(
+          "Não é possível calcular log de números não positivos."
+        );
       }
       resultado = Math.log10(Number(operacao[0]));
       console.log(`Operação realizada`);
@@ -287,11 +307,11 @@ function realizarOperacao() {
         "Não foi possível realizar a operação: operador inválido."
       );
   }
-  resultado = Math.round(resultado*100000000)/100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
+  resultado = Math.round(resultado * 100000000) / 100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
 }
 
 function mostrarResultado() {
-  digitado = [resultado];
+  digitado = resultado.toString().replace(".", ",").split("");
   console.log(`Resultado: ${resultado}`);
   return digitado.join("").replace(".", ",");
 }
@@ -321,8 +341,8 @@ function apagarUltimoCaractere() {
 
   let ultimoCaractere = digitado.pop();
 
-  if (digitado.length === 0){
-    digitado.push(0)
+  if (digitado.length === 0) {
+    digitado.push(0);
   }
 
   // REMOVER DO SEGUNDO OPERANDO
