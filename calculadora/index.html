@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <div id="calculadora">
+        <h1 class="titulo">Calculadora</h1>
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button onclick="printOperacao('sin(')">sin</button>
+            <button onclick="printOperacao('cos(')">cos</button>
+            <button onclick="printOperacao('pi')">π</button>
+            <button onclick="printOperacao('log(')">log</button>
+            
+            <button onclick="printOperacao('1')">1</button>
+            <button onclick="printOperacao('2')">2</button>
+            <button onclick="printOperacao('3')">3</button>
+            <button onclick="printOperacao('+')">+</button>
+            <button onclick="printOperacao('4')">4</button>
+            <button onclick="printOperacao('5')">5</button>
+            <button onclick="printOperacao('6')">6</button>
+            <button onclick="printOperacao('-')">-</button>
+            <button onclick="printOperacao('7')">7</button>
+            <button onclick="printOperacao('8')">8</button>
+            <button onclick="printOperacao('9')">9</button>
+            <button onclick="printOperacao('*')">*</button>
+            <button onclick="printOperacao('0')">0</button>
+            <button onclick="printOperacao('%')">%</button>
+            <button onclick="printOperacao('x')">x</button>
+            <button onclick="printOperacao('.')">.</button>
+            <button onclick="printOperacao(',')">,</button>
+            <button onclick="printOperacao(encodeURIComponent('('))">(</button>
+            <button onclick="printOperacao(encodeURIComponent(')'))">)</button>
+            <button onclick="calcular()">=</button>
+            <button onclick="limparUltimoNumero()">←</button>
+            <button onclick="limparDisplay()">C</button>
+            <button onclick="printOperacao('/')">/</button>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>
