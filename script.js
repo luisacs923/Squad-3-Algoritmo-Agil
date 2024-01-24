@@ -23,8 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const log = document.getElementById("log");
   const pi = document.getElementById("pi");
   const apagar = document.getElementById("apagar");
-  const quadrado = document.getElementById("quadrado");
-  const raiz = document.getElementById("raiz");
 
   resultado.textContent = mostrarDigitado();
 
@@ -137,18 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     apagarUltimoCaractere();
     resultado.textContent = mostrarDigitado();
   });
-  quadrado.addEventListener("click", () => {
-    adicionarOperador("quadrado");
-    realizarOperacao();
-    resultado.textContent = mostrarResultado();
-    proximaOperacao();
-  });
-  raiz.addEventListener("click", () => {
-    adicionarOperador("raiz");
-    realizarOperacao();
-    resultado.textContent = mostrarResultado();
-    proximaOperacao();
-  });
 });
 
 const operacao = [0, undefined, 0];
@@ -166,14 +152,19 @@ function verificarOperador() {
 function adicionarNumero(numero) {
   // PRIMEIRO OPERANDO
   if (!verificarOperador()) {
-    if (numero === Math.PI && operacao[0] !== 0) {
-      operacao[1] = "x";
-      operacao[2] = numero;
-
-      realizarOperacao();
-      mostrarResultado();
-      proximaOperacao();
-      return;
+    if (numero === Math.PI) {
+      if (operacao[0] !== 0) {
+        // Aqui se já existe algum operando
+        if (!isNaN(Number(operacao[0]))) {
+          throw new Error("Operação inválida: número de PI após operando existente.");
+        }
+        operacao[1] = "x";
+        operacao[2] = numero;
+        realizarOperacao();
+        mostrarResultado();
+        proximaOperacao();
+        return;
+      }
     }
 
     if (operacao[0] === 0 && numero === 0) {
@@ -181,6 +172,12 @@ function adicionarNumero(numero) {
       console.log(`Zero à esquerda não será exibido`);
       return;
     }
+
+    // Aqui ele vê se já existe alguma virgula
+    if (String(numero).includes(".")) {
+      throw new Error("Número já possui uma vírgula.");
+    }
+
     if (operacao[0] === 0) {
       digitado = [numero];
       operacao[0] = numero;
@@ -194,6 +191,7 @@ function adicionarNumero(numero) {
 
     return;
   }
+
   // SEGUNDO OPERANDO
   ultimoDigitado = digitado[digitado.length - 1];
 
@@ -250,6 +248,10 @@ function adicionarVirgula() {
 function adicionarOperador(simboloOperador) {
   ultimoDigitado = digitado[digitado.length - 1];
 
+  if (isNaN(Number(ultimoDigitado)) && ultimoDigitado !== ",") { //verificando se o ultimo é number
+    throw new Error("Operador não pode ser adicionado após a vírgula.");
+  }
+
   if (operacao[1] && typeof ultimoDigitado === "number") {
     realizarOperacao();
     mostrarResultado();
@@ -273,64 +275,59 @@ function adicionarOperador(simboloOperador) {
 }
 
 function realizarOperacao() {
-  switch (operacao[1]) {
-    case "+":
-      resultado = Number(operacao[0]) + Number(operacao[2]);
-      console.log(`Operação realizada`);
-      break;
-    case "-":
-      resultado = Number(operacao[0]) - Number(operacao[2]);
-      console.log(`Operação realizada`);
-      break;
-    case "/":
-      if (operacao[2] === 0) {
-        throw new Error("Não é possível dividir por zero.");
-      }
-      resultado = Number(operacao[0]) / Number(operacao[2]);
-      console.log(`Operação realizada`);
-      break;
-    case "x":
-      resultado = Number(operacao[0]) * Number(operacao[2]);
-      console.log(`Operação realizada`);
-      break;
-    case "%":
-      resultado = Number(operacao[0]) / 100;
-      console.log(`Operação realizada`);
-      break;
-    case "sin":
-      resultado = (Number(operacao[0]) * Math.PI) / 180;
-      resultado = Math.sin(resultado);
-      console.log(`Operação realizada`);
-      break;
-    case "cos":
-      resultado = (Number(operacao[0]) * Math.PI) / 180;
-      resultado = Math.cos(resultado);
-      console.log(`Operação realizada`);
-      break;
-    case "log":
-      if (Number(operacao[0]) <= 0) {
-        throw new Error(
-          "Não é possível calcular log de números não positivos."
-        );
-      }
-      resultado = Math.log10(Number(operacao[0]));
-      console.log(`Operação realizada`);
-      break;
-    case "raiz":
-      resultado = Math. sqrt(Number(operacao[0]));
-      console.log(`Operação realizada`);
-      break;
-    case "quadrado":
-      resultado = Number(operacao[0]) * Number(operacao[0]);
-      console.log(`Operação realizada`);
-      break;
-    default:
-      throw new Error(
-        "Não foi possível realizar a operação: operador inválido."
-      );
+  try {
+    switch (operacao[1]) {
+      case "+":
+        resultado = Number(operacao[0]) + Number(operacao[2]);
+        break;
+      case "-":
+        resultado = Number(operacao[0]) - Number(operacao[2]);
+        break;
+      case "/": // verificação para evitar a divisão por zero.
+        if (operacao[2] === 0) {
+          throw new Error("Não é possível dividir por zero.");
+        }
+          resultado = Number(operacao[0]) / Number(operacao[2]);
+          break;
+      case "x":
+        resultado = Number(operacao[0]) * Number(operacao[2]);
+        break;
+      case "%":
+        resultado = Number(operacao[0]) / 100;
+        break;
+        case "sin":
+          if (isNaN(Number(operacao[0]))) {
+              throw new Error("Ângulo inválido para a operação seno.");
+          }
+          resultado = (Number(operacao[0]) * Math.PI) / 180;
+          resultado = Math.sin(resultado);
+          break;
+      
+      case "cos":
+          if (isNaN(Number(operacao[0]))) {
+              throw new Error("Ângulo inválido para a operação cosseno.");
+          }
+          resultado = (Number(operacao[0]) * Math.PI) / 180;
+          resultado = Math.cos(resultado);
+          break;
+          case "log":
+          if (Number(operacao[0]) <= 0) {
+              throw new Error(
+                "Não é possível calcular log de números não positivos."
+              );
+            }
+            resultado = Math.log10(Number(operacao[0]));
+            break;
+
+        default:
+          throw new Error("Não foi possível realizar a operação: operador inválido.");
+    }
+    console.log(`Operação realizada: ${resultado}`);
+  } catch (error) {
+    console.error("Erro:", error.message);
   }
-  resultado = Math.round(resultado * 100000000) / 100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
 }
+  resultado = Math.round(resultado * 100000000) / 100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
 
 function mostrarResultado() {
   digitado = resultado.toString().replace(".", ",").split("");
