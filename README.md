@@ -16,10 +16,10 @@ Esse desafio compõe o projeto final do 4º módulo do curso [Vem Ser Tech - Fro
 
 ## Integrantes do Grupo 💻
 
-- [Gabriella Freitas](https://github.com/gabriellafsena);
-- [Igor Benez](https://github.com/igor-benez);
-- [Lucas de Grande](https://github.com/);
-- [Luisa Correia](https://github.com/luisacs923);
-- [Matheus Pino](https://github.com/matheuspino);
-- [Paulo Lemes](https://github.com/paulo-lemes);
+- [Gabriella Freitas](https://github.com/gabriellafsena)👩🏻‍💻;
+- [Igor Benez](https://github.com/igor-benez)👨🏻‍💻;
+- [Lucas de Grande](https://github.com/)👨🏻‍💻;
+- [Luisa Correia](https://github.com/luisacs923)👩🏻‍💻;
+- [Matheus Pino](https://github.com/matheuspino)👨🏻‍💻;
+- [Paulo Lemes](https://github.com/paulo-lemes)👨🏻‍💻;
 
