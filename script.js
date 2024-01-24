@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const log = document.getElementById("log");
   const pi = document.getElementById("pi");
   const apagar = document.getElementById("apagar");
+  const quadrado = document.getElementById("quadrado");
+  const raiz = document.getElementById("raiz");
 
   resultado.textContent = mostrarDigitado();
 
@@ -88,6 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   porcentagem.addEventListener("click", () => {
     adicionarOperador("%");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
+  quadrado.addEventListener("click", () => {
+    adicionarOperador("quadrado");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
+  raiz.addEventListener("click", () => {
+    adicionarOperador("raiz");
     realizarOperacao();
     resultado.textContent = mostrarResultado();
     proximaOperacao();
@@ -287,47 +301,55 @@ function realizarOperacao() {
         if (operacao[2] === 0) {
           throw new Error("Não é possível dividir por zero.");
         }
-          resultado = Number(operacao[0]) / Number(operacao[2]);
-          break;
+        resultado = Number(operacao[0]) / Number(operacao[2]);
+        break;
       case "x":
         resultado = Number(operacao[0]) * Number(operacao[2]);
         break;
       case "%":
         resultado = Number(operacao[0]) / 100;
         break;
-        case "sin":
-          if (isNaN(Number(operacao[0]))) {
-              throw new Error("Ângulo inválido para a operação seno.");
-          }
-          resultado = (Number(operacao[0]) * Math.PI) / 180;
-          resultado = Math.sin(resultado);
-          break;
-      
-      case "cos":
-          if (isNaN(Number(operacao[0]))) {
-              throw new Error("Ângulo inválido para a operação cosseno.");
-          }
-          resultado = (Number(operacao[0]) * Math.PI) / 180;
-          resultado = Math.cos(resultado);
-          break;
-          case "log":
-          if (Number(operacao[0]) <= 0) {
-              throw new Error(
-                "Não é possível calcular log de números não positivos."
-              );
-            }
-            resultado = Math.log10(Number(operacao[0]));
-            break;
+      case "sin":
+        if (isNaN(Number(operacao[0]))) {
+          throw new Error("Ângulo inválido para a operação seno.");
+        }
+        resultado = (Number(operacao[0]) * Math.PI) / 180;
+        resultado = Math.sin(resultado);
+        break;
 
-        default:
-          throw new Error("Não foi possível realizar a operação: operador inválido.");
+      case "cos":
+        if (isNaN(Number(operacao[0]))) {
+          throw new Error("Ângulo inválido para a operação cosseno.");
+        }
+        resultado = (Number(operacao[0]) * Math.PI) / 180;
+        resultado = Math.cos(resultado);
+        break;
+      case "log":
+        if (Number(operacao[0]) <= 0) {
+          throw new Error(
+            "Não é possível calcular log de números não positivos."
+          );
+        }
+        resultado = Math.log10(Number(operacao[0]));
+        break;
+      case "raiz":
+        resultado = Math.sqrt(Number(operacao[0]));
+        console.log(`Operação realizada`);
+        break;
+      case "quadrado":
+        resultado = Number(operacao[0]) * Number(operacao[0]);
+        console.log(`Operação realizada`);
+        break;
+
+      default:
+        throw new Error("Não foi possível realizar a operação: operador inválido.");
     }
     console.log(`Operação realizada: ${resultado}`);
   } catch (error) {
     console.error("Erro:", error.message);
   }
 }
-  resultado = Math.round(resultado * 100000000) / 100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
+resultado = Math.round(resultado * 100000000) / 100000000; // para resolver o problema de ponto flutuante (a calculadora terá 8 casas decimais)
 
 function mostrarResultado() {
   digitado = resultado.toString().replace(".", ",").split("");
