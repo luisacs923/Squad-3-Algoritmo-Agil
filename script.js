@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const log = document.getElementById("log");
   const pi = document.getElementById("pi");
   const apagar = document.getElementById("apagar");
+  const quadrado = document.getElementById("quadrado");
+  const raiz = document.getElementById("raiz");
 
   resultado.textContent = mostrarDigitado();
 
@@ -134,6 +136,18 @@ document.addEventListener("DOMContentLoaded", () => {
   apagar.addEventListener("click", () => {
     apagarUltimoCaractere();
     resultado.textContent = mostrarDigitado();
+  });
+  quadrado.addEventListener("click", () => {
+    adicionarOperador("quadrado");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
+  });
+  raiz.addEventListener("click", () => {
+    adicionarOperador("raiz");
+    realizarOperacao();
+    resultado.textContent = mostrarResultado();
+    proximaOperacao();
   });
 });
 
@@ -300,6 +314,14 @@ function realizarOperacao() {
         );
       }
       resultado = Math.log10(Number(operacao[0]));
+      console.log(`Operação realizada`);
+      break;
+    case "raiz":
+      resultado = Math. sqrt(Number(operacao[0]));
+      console.log(`Operação realizada`);
+      break;
+    case "quadrado":
+      resultado = Number(operacao[0]) * Number(operacao[0]);
       console.log(`Operação realizada`);
       break;
     default:
