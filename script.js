@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const apagar = document.getElementById("apagar");
   const quadrado = document.getElementById("quadrado");
   const raiz = document.getElementById("raiz");
+  const mudaCalculadora = document.getElementById("mudaCalculadora")
 
   resultado.textContent = mostrarDigitado();
 
@@ -148,6 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
   apagar.addEventListener("click", () => {
     apagarUltimoCaractere();
     resultado.textContent = mostrarDigitado();
+  });
+
+  mudaCalculadora.addEventListener('click', function () {
+    window.location.href = './calculadora/index.html';
   });
 });
 
