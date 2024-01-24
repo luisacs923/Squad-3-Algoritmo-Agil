@@ -2,7 +2,7 @@
 
 # # Repositório criado para atividade do módulo de Front End Dinâmico (JS/DOM) do curso de Front End Vem Ser Tech da Ada 
 
-Esse desafio compõe o [Vem Ser Tech - Front End], confeccionado pelo  grupo Algoritmo Ágil.
+Esse desafio compõe o [Vem Ser Tech - Front End](https://ada.tech/sou-aluno/programas/ifood-vem-ser-tech), confeccionado pelo  grupo Algoritmo Ágil.
 
 
 ## Organização do Projeto 📈
