@@ -1,0 +1,37 @@
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #0F1035;
+    color: #DCF2F1;
+    border-radius: 10px;
+}
+
+#calculadora {
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#display {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 25px;
+    background-color: #7FC7D9;
+}
+
+.buttons {
+    background-color: #DCF2F1 ;
+   
+}
+.buttons button {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    margin: 5px;
+
+}
+
+.buttons button:hover {
+    background-color: #b1dde97b
+   
+}
