@@ -173,10 +173,6 @@ function adicionarNumero(numero) {
   if (!verificarOperador()) {
     if (numero === Math.PI) {
       if (operacao[0] !== 0) {
-        // Aqui se já existe algum operando
-        if (!isNaN(Number(operacao[0]))) {
-          throw new Error("Operação inválida: número de PI após operando existente.");
-        }
         operacao[1] = "x";
         operacao[2] = numero;
         realizarOperacao();
@@ -190,11 +186,6 @@ function adicionarNumero(numero) {
       digitado = [numero];
       console.log(`Zero à esquerda não será exibido`);
       return;
-    }
-
-    // Aqui ele vê se já existe alguma virgula
-    if (String(numero).includes(".")) {
-      throw new Error("Número já possui uma vírgula.");
     }
 
     if (operacao[0] === 0) {
@@ -267,7 +258,7 @@ function adicionarVirgula() {
 function adicionarOperador(simboloOperador) {
   ultimoDigitado = digitado[digitado.length - 1];
 
-  if (isNaN(Number(ultimoDigitado)) && ultimoDigitado !== ",") { //verificando se o ultimo é number
+  if (ultimoDigitado === ",") {
     throw new Error("Operador não pode ser adicionado após a vírgula.");
   }
 
