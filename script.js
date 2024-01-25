@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   mudaCalculadora.addEventListener('click', function () {
-    window.location.href = './calculadora/index.html';
+    window.location.href = './calculadora-2/index.html';
   });
 });
 
