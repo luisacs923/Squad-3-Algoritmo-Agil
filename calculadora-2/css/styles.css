@@ -5,7 +5,7 @@ h1 {
     border-radius: 10px;
 }
 
-#calculadora {
+.calculadora {
     width: 300px;
     margin: 50px auto;
     text-align: center;
@@ -15,23 +15,23 @@ h1 {
     width: 100%;
     margin-bottom: 10px;
     padding: 0;
-    font-size: 25px;
+    font-size: 30px;
     background-color: #7FC7D9;
 }
 
-.buttons {
+.btns {
     background-color: #DCF2F1 ;
    
 }
-.buttons button {
-    width: 50px;
-    height: 50px;
+.button {
+    width: 60px;
+    height: 60px;
     font-size: 25px;
     margin: 5px;
 
 }
 
-.buttons button:hover {
+.button:hover {
     background-color: #b1dde97b
    
 }
