@@ -11,60 +11,72 @@
   </head>
 
   <body>
-    <div class="grid grid-cols-6 mt-7">
-      <div class="flex flex-col w-full col-start-3 col-span-2">
-        <div class="text-center mb-1 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+    <div class="grid grid-cols-8 md:grid-cols-8 lg:grid-cols-6 mt-7">
+      <div class="flex flex-col w-full col-start-2 col-span-6 md:col-start-3 md:col-span-4 lg:col-start-3 lg:col-span-2">
+        <div class="text-center mb-1 bg-stone-900 text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow">
           <h1 class="font-semibold">Calculadora</h1>
         </div>
         <div class="flex justify-center">
-          <h3 id="resultado"
-            class="w-3/4 bg-black text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow">
-            0
-          </h3>
+          <input id="display"
+            class="w-3/4 text-right bg-stone-900 text-white font-semibold py-2 px-4 border border-gray-300 rounded shadow"
+          disabled/>
           <button id="apagar"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-stone-900 text-white hover:bg-stone-950 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             <img class="mx-auto" width="20" src="./delete-left.svg" alt="ícone apagar">
           </button>
+        </div>
 
+        <div class="w-full flex justify-center">
+          <button id="sin"
+            class="w-full bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            sin
+          </button>
+          <button id="cos"
+            class="w-full bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            cos
+          </button>
+          <button id="log"
+            class="w-full bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            log
+          </button>
         </div>
 
         <div class="flex justify-center">
           <button id="pi"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-full bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             &#960
           </button>
-          <button id="porcentagem"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
-            %
-          </button>
           <button id="quadrado"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-full bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             x²
           </button>
           <button id="raiz"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-full bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             √x
           </button>
         </div>
 
         <div class="flex justify-center">
-          <button id="seno"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
-            sin
+          
+          <button id="porcentagem"
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            %
           </button>
-          <button id="cosseno"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
-            cos
+          <button id="parenteseAberto"
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            (
           </button>
-          <button id="log"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
-            log
+          <button id="parenteseFechado"
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            )
           </button>
           <button id="divisao"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             /
           </button>
         </div>
+
+        
         <div class="flex justify-center">
           <button id="sete"
             class="w-1/4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
@@ -79,7 +91,7 @@
             9
           </button>
           <button id="multiplicacao"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             x
           </button>
         </div>
@@ -97,7 +109,7 @@
             6
           </button>
           <button id="subtracao"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             -
           </button>
         </div>
@@ -115,7 +127,7 @@
             3
           </button>
           <button id="soma"
-            class="w-1/4 bg-blue-700 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-blue-800 text-white hover:bg-blue-900 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             +
           </button>
         </div>
@@ -129,24 +141,20 @@
             0
           </button>
           <button id="igual"
-            class="w-1/4 bg-orange-500 text-white hover:bg-orange-600 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-orange-400 text-white hover:bg-orange-500 text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             =
           </button>
           <button id="limpar"
-            class="w-1/4 bg-black text-white hover:bg-gray-900 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+            class="w-1/4 bg-stone-900 text-white hover:bg-stone-950 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
             C
           </button>
         </div>
-        <button id="mudaCalculadora"
-          class="text-center mt-7 hover:bg-gray-100 text-gray-600 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
-          Ir para Calculadora 2.0
-        </button>
       </div>
       <div>
 
       </div>
-      <script src="script.js"></script>
     </div>
   </body>
-
+  
+  <script src="script.js"></script>
 </html>
